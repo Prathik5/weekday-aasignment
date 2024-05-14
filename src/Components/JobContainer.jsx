@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios'
-import JobCard from './JobCard'
+import React, {useEffect} from 'react';
+import axios from 'axios';
+import JobCard from './JobCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { setJobData } from '../utils/jobSlice';
 import Grid from '@mui/material/Grid';
 
 const JobContainer = () => {
+    const dispatch = useDispatch()
+    const jobData = useSelector(state => state.jobs.jobData) 
 
-    const [data, setData] = useState([])
 
     const fetchData = async () =>{
         try {
@@ -13,7 +16,7 @@ const JobContainer = () => {
                 limit: 10,
                 offset: 0
               });
-              setData(response.data.jdList)
+              dispatch(setJobData(response.data.jdList))
               console.log(response.data.jdList);
         } catch (error) {
             console.log(error);
@@ -28,7 +31,7 @@ const JobContainer = () => {
     <>
     <h1>Weekday Assignment</h1>
     <Grid container spacing={1}>
-        {data.map((dataSet) => (<JobCard info={dataSet} key={dataSet.jdUid}/>))}
+        {jobData.map((dataSet) => (<JobCard info={dataSet} key={dataSet.jdUid}/>))}
     </Grid>
     </>
   )
