@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import JobCard from './JobCard'
+import Grid from '@mui/material/Grid';
 
 const JobContainer = () => {
 
@@ -24,20 +26,10 @@ const JobContainer = () => {
 
   return (
     <>
-    {data.map((dataSet) =>{
-        return (
-            <div key={dataSet.jdUid}>
-                <div>{dataSet.companyName}</div>
-                <img src={dataSet.logoUrl} alt={dataSet.companyName} style={{width : "50px", height: "50px"}} />
-                <div>{dataSet.jobDetailsFromCompany}</div>
-                <div>{dataSet.minExp}</div>
-                <div>{dataSet.maxJdSalary}</div>
-                <div>{dataSet.maxExp}</div>
-                <div>{dataSet.location}</div>
-                <div>{dataSet.jobRole}</div>
-                <hr />
-            </div>)
-    })}
+    <h1>Weekday Assignment</h1>
+    <Grid container spacing={1}>
+        {data.map((dataSet) => (<JobCard info={dataSet} key={dataSet.jdUid}/>))}
+    </Grid>
     </>
   )
 }
