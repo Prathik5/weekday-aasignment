@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   jobData: [],
+  filteredJobData: [],
 };
 
 const jobSlice = createSlice({
@@ -11,9 +12,12 @@ const jobSlice = createSlice({
     setJobData: (state, action) => {
       state.jobData = action.payload;
     },
+    setFilteredJobData: (state, action) => {
+      state.filteredJobData = action.payload;
+    },
   },
 });
 
-export const { setJobData } = jobSlice.actions;
+export const { setJobData, setFilteredJobData } = jobSlice.actions;
 
 export default jobSlice.reducer;
